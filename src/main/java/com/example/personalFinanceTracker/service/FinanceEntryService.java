@@ -108,4 +108,46 @@ public class FinanceEntryService {
         return summary;
     }
 
+    public Map<String, Long> getMonthlySummary(int year, int month) {
+
+        LocalDate startDate = LocalDate.of(year, month, 1);
+        LocalDate endDate = startDate.withDayOfMonth(startDate.lengthOfMonth());
+
+        return calculateSummary(startDate, endDate);
+    }
+
+    public Map<String, Long> getYearlySummary(int year) {
+
+        LocalDate startDate = LocalDate.of(year, 1, 1);
+        LocalDate endDate = LocalDate.of(year, 12, 31);
+
+        return calculateSummary(startDate, endDate);
+    }
+
+    // COMMON LOGIC (private helper)
+    private Map<String, Long> calculateSummary(LocalDate startDate, LocalDate endDate) {
+
+        long totalIncome = repository
+                .findByTypeAndDateBetween(EntryType.INCOME, startDate, endDate)
+                .stream()
+                .mapToLong(FinanceEntry::getAmount)
+                .sum();
+
+        long totalExpense = repository
+                .findByTypeAndDateBetween(EntryType.EXPENSE, startDate, endDate)
+                .stream()
+                .mapToLong(FinanceEntry::getAmount)
+                .sum();
+
+        long balance = totalIncome - totalExpense;
+
+        Map<String, Long> summary = new HashMap<>();
+        summary.put("totalIncome", totalIncome);
+        summary.put("totalExpense", totalExpense);
+        summary.put("balance", balance);
+
+        return summary;
+    }
+
+
 }

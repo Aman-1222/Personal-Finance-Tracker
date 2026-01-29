@@ -87,4 +87,19 @@ public class FinanceEntryController {
                 .header("Content-Type", "text/csv")
                 .body(csvBytes);
     }
+
+    @GetMapping("/summary/monthly")
+    public ResponseEntity<Map<String, Long>> getMonthlySummary(
+            @RequestParam int year,
+            @RequestParam int month
+    ) {
+        return ResponseEntity.ok(service.getMonthlySummary(year, month));
+    }
+
+    @GetMapping("/summary/yearly")
+    public ResponseEntity<Map<String, Long>> getYearlySummary(
+            @RequestParam int year
+    ) {
+        return ResponseEntity.ok(service.getYearlySummary(year));
+    }
 }
