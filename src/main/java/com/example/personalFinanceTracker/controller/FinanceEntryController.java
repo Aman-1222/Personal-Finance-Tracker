@@ -7,6 +7,7 @@ package com.example.personalFinanceTracker.controller;
 import com.example.personalFinanceTracker.model.EntryType;
 import com.example.personalFinanceTracker.model.FinanceEntry;
 import com.example.personalFinanceTracker.service.FinanceEntryService;
+import com.example.personalFinanceTracker.util.CsvExportUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -70,5 +71,20 @@ public class FinanceEntryController {
     @GetMapping("/summary")
     public ResponseEntity<Map<String, Long>> getSummary() {
         return ResponseEntity.ok(service.getSummary());
+    }
+
+    @GetMapping("/export")
+    public ResponseEntity<byte[]> exportToCsv() {
+
+        List<FinanceEntry> entries = service.getEntries(null, null, null, null);
+
+        String csvData = CsvExportUtil.convertToCsv(entries);
+
+        byte[] csvBytes = csvData.getBytes();
+
+        return ResponseEntity.ok()
+                .header("Content-Disposition", "attachment; filename=finance_entries.csv")
+                .header("Content-Type", "text/csv")
+                .body(csvBytes);
     }
 }
