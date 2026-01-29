@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/entries")
@@ -64,5 +65,10 @@ public class FinanceEntryController {
     public ResponseEntity<String> deleteEntry(@PathVariable Long id) {
         service.deleteEntry(id);
         return ResponseEntity.ok("Entry deleted successfully");
+    }
+
+    @GetMapping("/summary")
+    public ResponseEntity<Map<String, Long>> getSummary() {
+        return ResponseEntity.ok(service.getSummary());
     }
 }
