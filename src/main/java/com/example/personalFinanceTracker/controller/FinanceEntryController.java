@@ -11,6 +11,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/entries")
 public class FinanceEntryController {
@@ -28,18 +31,18 @@ public class FinanceEntryController {
         return new ResponseEntity<>(savedEntry, HttpStatus.CREATED);
     }
 
-//    // READ ALL (with filters)
-//    @GetMapping
-//    public ResponseEntity<List<FinanceEntry>> getAllEntries(
-//            @RequestParam(required = false) EntryType type,
-//            @RequestParam(required = false) String category,
-//            @RequestParam(required = false) LocalDate startDate,
-//            @RequestParam(required = false) LocalDate endDate
-//    ) {
-//        return ResponseEntity.ok(
-//                service.getEntries(type, category, startDate, endDate)
-//        );
-//    }
+    // READ ALL (with filters)
+    @GetMapping
+    public ResponseEntity<List<FinanceEntry>> getAllEntries(
+            @RequestParam(required = false) EntryType type,
+            @RequestParam(required = false) String category,
+            @RequestParam(required = false) LocalDate startDate,
+            @RequestParam(required = false) LocalDate endDate
+    ) {
+        return ResponseEntity.ok(
+                service.getEntries(type, category, startDate, endDate)
+        );
+    }
 //
 //    // READ BY ID
 //    @GetMapping("/{id}")

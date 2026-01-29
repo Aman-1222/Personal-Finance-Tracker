@@ -2,9 +2,13 @@ package com.example.personalFinanceTracker.service;
 
 
 
+import com.example.personalFinanceTracker.model.EntryType;
 import com.example.personalFinanceTracker.model.FinanceEntry;
 import com.example.personalFinanceTracker.repository.FinanceEntryRepository;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
+import java.util.List;
 
 
 @Service
@@ -19,6 +23,33 @@ public class FinanceEntryService {
     // CREATE
     public FinanceEntry addEntry(FinanceEntry entry) {
         return repository.save(entry);
+    }
+
+    // READ + FILTER
+    public List<FinanceEntry> getEntries(
+            EntryType type,
+            String category,
+            LocalDate startDate,
+            LocalDate endDate
+    ) {
+
+        if (type != null && startDate != null && endDate != null) {
+            return repository.findByTypeAndDateBetween(type, startDate, endDate);
+        }
+
+        if (type != null) {
+            return repository.findByType(type);
+        }
+
+        if (category != null) {
+            return repository.findByCategory(category);
+        }
+
+        if (startDate != null && endDate != null) {
+            return repository.findByDateBetween(startDate, endDate);
+        }
+
+        return repository.findAll();
     }
 
 
