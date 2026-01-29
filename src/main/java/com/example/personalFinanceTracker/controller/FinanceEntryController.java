@@ -59,10 +59,10 @@ public class FinanceEntryController {
         return ResponseEntity.ok(service.updateEntry(id, entry));
     }
 
-//    // DELETE
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity<Void> deleteEntry(@PathVariable Long id) {
-//        service.deleteEntry(id);
-//        return ResponseEntity.noContent().build();
-//    }
+    // DELETE
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteEntry(@PathVariable Long id) {
+        service.deleteEntry(id);
+        return ResponseEntity.ok("Entry deleted successfully");
+    }
 }

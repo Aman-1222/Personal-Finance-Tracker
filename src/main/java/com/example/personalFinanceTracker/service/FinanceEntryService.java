@@ -72,5 +72,12 @@ public class FinanceEntryService {
         return repository.save(existing);
     }
 
+    // DELETE
+    public void deleteEntry(Long id) {
+        if (!repository.existsById(id)) {
+            throw new RuntimeException("Finance entry not found with id: " + id);
+        }
+        repository.deleteById(id);
+    }
 
 }
