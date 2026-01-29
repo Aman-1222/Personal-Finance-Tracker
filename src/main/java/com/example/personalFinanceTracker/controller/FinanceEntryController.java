@@ -50,15 +50,15 @@ public class FinanceEntryController {
         return ResponseEntity.ok(service.getEntryById(id));
     }
 
-//    // UPDATE
-//    @PutMapping("/{id}")
-//    public ResponseEntity<FinanceEntry> updateEntry(
-//            @PathVariable Long id,
-//            @RequestBody FinanceEntry entry
-//    ) {
-//        return ResponseEntity.ok(service.updateEntry(id, entry));
-//    }
-//
+    // UPDATE
+    @PutMapping("/{id}")
+    public ResponseEntity<FinanceEntry> updateEntry(
+            @PathVariable Long id,
+            @RequestBody FinanceEntry entry
+    ) {
+        return ResponseEntity.ok(service.updateEntry(id, entry));
+    }
+
 //    // DELETE
 //    @DeleteMapping("/{id}")
 //    public ResponseEntity<Void> deleteEntry(@PathVariable Long id) {

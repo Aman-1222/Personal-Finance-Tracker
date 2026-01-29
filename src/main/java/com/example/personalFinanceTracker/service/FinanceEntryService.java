@@ -59,5 +59,18 @@ public class FinanceEntryService {
                         new RuntimeException("Finance entry not found with id: " + id));
     }
 
+    // UPDATE
+    public FinanceEntry updateEntry(Long id, FinanceEntry updatedEntry) {
+        FinanceEntry existing = getEntryById(id);
+
+        existing.setAmount(updatedEntry.getAmount());
+        existing.setType(updatedEntry.getType());
+        existing.setCategory(updatedEntry.getCategory());
+        existing.setDate(updatedEntry.getDate());
+        existing.setDescription(updatedEntry.getDescription());
+
+        return repository.save(existing);
+    }
+
 
 }
