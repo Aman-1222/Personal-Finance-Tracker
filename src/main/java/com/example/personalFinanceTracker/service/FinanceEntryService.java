@@ -52,5 +52,12 @@ public class FinanceEntryService {
         return repository.findAll();
     }
 
+    // READ BY ID
+    public FinanceEntry getEntryById(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() ->
+                        new RuntimeException("Finance entry not found with id: " + id));
+    }
+
 
 }

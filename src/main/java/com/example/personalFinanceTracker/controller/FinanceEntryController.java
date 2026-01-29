@@ -43,13 +43,13 @@ public class FinanceEntryController {
                 service.getEntries(type, category, startDate, endDate)
         );
     }
-//
-//    // READ BY ID
-//    @GetMapping("/{id}")
-//    public ResponseEntity<FinanceEntry> getEntryById(@PathVariable Long id) {
-//        return ResponseEntity.ok(service.getEntryById(id));
-//    }
-//
+
+    // READ BY ID
+    @GetMapping("/{id}")
+    public ResponseEntity<FinanceEntry> getEntryById(@PathVariable Long id) {
+        return ResponseEntity.ok(service.getEntryById(id));
+    }
+
 //    // UPDATE
 //    @PutMapping("/{id}")
 //    public ResponseEntity<FinanceEntry> updateEntry(
